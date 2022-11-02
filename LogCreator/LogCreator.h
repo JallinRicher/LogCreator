@@ -1,8 +1,9 @@
 /*****************************************************************//**
  * \file   LogCreator.h
- * \brief  
+ * \brief  Chinese: 日志系统类，负责输出和保存系统日志。
+ * \brief  English: Log system class, responsible for outputting and saving system logs.
  * 
- * \author lirdma
+ * \author JallinRichel(Rundong Li)
  * \date   November 2022
  *********************************************************************/
 
@@ -26,11 +27,11 @@ public:
 	~LogCreator();
 
 	/**
-	 * 风格化打印日志，打印出的日志长度不能超过 1024Bytes
-	 * \param _Format 格式化日志
-	 * \param ... 变长参数列表
-	 * \return size_t 写入的日志长度
-	 */
+	* 风格化打印日志，打印出的日志长度不能超过 1024Bytes
+	* \param _Format 格式化日志
+	* \param ... 变长参数列表
+	* \return size_t 写入的日志长度
+	*/
 	size_t  CLASS_API PUBLIC_FUNCTION StyledWriteLog(IN const char* _Format, ...);
 
 	/**

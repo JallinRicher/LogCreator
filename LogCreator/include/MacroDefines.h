@@ -1,7 +1,16 @@
+/*****************************************************************//**
+ * \file   MacroDefines.h
+ * \brief  Chinese: ∫Í∂®“Â
+ * \brief  English: Macro defines.
+ * 
+ * \author JallinRichel(Rundong Li)
+ * \date   November 2022
+ *********************************************************************/
+
 #pragma once
 
-#define IN						// Input
-#define OUT						// Output
+#define IN
+#define OUT
 #define CLASS_API
 
 #define BASE_CLASS

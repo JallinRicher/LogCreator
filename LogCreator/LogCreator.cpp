@@ -72,15 +72,6 @@ char* LogCreator::_writeLog(IN const char* _Format, IN va_list ap)
 		return nullptr;
 	}
 
-	m_Buffer[ret] = '\n';
-	if (ret <= LOG_BUFFER_SIZE - 2)
-		m_Buffer[ret + 1] = '\0';
-	else
-	{
-		m_strBuffer.clear();
-		m_strBuffer = m_Buffer + '\0';
-		return const_cast<char*>(m_strBuffer.c_str());
-	}
 	return m_Buffer;
 }
 

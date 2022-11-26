@@ -75,7 +75,7 @@ char* LogCreator::_writeLog(IN const char* _Format, IN va_list ap)
 	return m_Buffer;
 }
 
-void LogCreator::CreateFile(IN const string& FilePath)
+void LogCreator::createFile(IN const string& FilePath)
 {
 	char* pcSubDir = NULL;
 	char* pcLast = NULL;
@@ -132,7 +132,7 @@ void LogCreator::CreateFile(IN const string& FilePath)
 	return;
 }
 
-void LogCreator::CreateFile(IN const char* _FilePath)
+void LogCreator::createFile(IN const char* _FilePath)
 {
 	string FilePath = _FilePath;
 	char* pcSubDir = NULL;
@@ -188,4 +188,157 @@ void LogCreator::CreateFile(IN const char* _FilePath)
 
 	free((void*)pcFullDir);
 	return;
+}
+
+void LogCreator::FatalLog(const char* _Format, ...)
+{
+	LogLevel level = LogLevel::FATAL;
+	va_list ap;
+	char* res = nullptr;
+	va_start(ap, _Format);
+	res = _writeLog(_Format, ap);
+	va_end(ap);
+
+	if (res == nullptr)
+		return;
+
+	string _str1 = "<<< [ ";
+	string _date = __DATE__;
+	string _time = __TIME__;
+	string _str2 = " ] [ FATAL ] ";
+	string _str3 = res;
+
+	string StyledLog = _str1 + _date + " " + _time + _str2 + _str3;
+	m_LogFile << StyledLog;
+}
+
+void LogCreator::ErrorLog(const char* _Format, ...)
+{
+	LogLevel level = (LogLevel)1;
+	va_list ap;
+	char* res = nullptr;
+	va_start(ap, _Format);
+	res = _writeLog(_Format, ap);
+	va_end(ap);
+
+	if (res == nullptr)
+		return;
+
+	string _str1 = "<<< [ ";
+	string _date = __DATE__;
+	string _time = __TIME__;
+	string _str2 = " ] [ ERROR ] ";
+	string _str3 = res;
+
+	string StyledLog = _str1 + _date + " " + _time + _str2 + _str3;
+	m_LogFile << StyledLog;
+}
+
+void LogCreator::WarnLog(const char* _Format, ...)
+{
+	LogLevel level = LogLevel::WARN;
+	va_list ap;
+	char* res = nullptr;
+	va_start(ap, _Format);
+	res = _writeLog(_Format, ap);
+	va_end(ap);
+
+	if (res == nullptr)
+		return;
+
+	string _str1 = "<<< [ ";
+	string _date = __DATE__;
+	string _time = __TIME__;
+	string _str2 = " ] [ WARN ] ";
+	string _str3 = res;
+
+	string StyledLog = _str1 + _date + " " + _time + _str2 + _str3;
+	m_LogFile << StyledLog;
+}
+
+void LogCreator::InfoLog(const char* _Format, ...)
+{
+	LogLevel level = LogLevel::INFO;
+	va_list ap;
+	char* res = nullptr;
+	va_start(ap, _Format);
+	res = _writeLog(_Format, ap);
+	va_end(ap);
+
+	if (res == nullptr)
+		return;
+
+	string _str1 = "<<< [ ";
+	string _date = __DATE__;
+	string _time = __TIME__;
+	string _str2 = " ] [ INFO ] ";
+	string _str3 = res;
+
+	string StyledLog = _str1 + _date + " " + _time + _str2 + _str3;
+	m_LogFile << StyledLog;
+}
+
+void LogCreator::DebugLog(const char* _Format, ...)
+{
+	LogLevel level = LogLevel::DEBUG;
+	va_list ap;
+	char* res = nullptr;
+	va_start(ap, _Format);
+	res = _writeLog(_Format, ap);
+	va_end(ap);
+
+	if (res == nullptr)
+		return;
+
+	string _str1 = "<<< [ ";
+	string _date = __DATE__;
+	string _time = __TIME__;
+	string _str2 = " ] [ DEBUG ] ";
+	string _str3 = res;
+
+	string StyledLog = _str1 + _date + " " + _time + _str2 + _str3;
+	m_LogFile << StyledLog;
+}
+
+void LogCreator::AllLog(const char* _Format, ...)
+{
+	LogLevel level = LogLevel::ALL;
+	va_list ap;
+	char* res = nullptr;
+	va_start(ap, _Format);
+	res = _writeLog(_Format, ap);
+	va_end(ap);
+
+	if (res == nullptr)
+		return;
+
+	string _str1 = "<<< [ ";
+	string _date = __DATE__;
+	string _time = __TIME__;
+	string _str2 = " ] [ ALL ] ";
+	string _str3 = res;
+
+	string StyledLog = _str1 + _date + " " + _time + _str2 + _str3;
+	m_LogFile << StyledLog;
+}
+
+void LogCreator::CustomLog(IN const char* _Format, IN CustLog customLog, ...)
+{
+	va_list ap;
+	char* res = nullptr;
+	va_start(ap, _Format);
+	res = _writeLog(_Format, ap);
+	va_end(ap);
+
+	if (res == nullptr)
+		return;
+
+	string _str1 = "<<< [ ";
+	string _date = __DATE__;
+	string _time = __TIME__;
+	string _str2 = " ] [ " + customLog.level + "] ";
+	string _str3 = res;
+
+	string StyledLog = _str1 + _date + " " + _time + _str2 + _str3;
+	m_LogFile << StyledLog;
 }

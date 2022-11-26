@@ -21,7 +21,7 @@
     <ClInclude Include="FileOperator.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="MacroDefines.h">
+    <ClInclude Include="Defines.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -5,7 +5,7 @@
 #include <direct.h>
 #include <string>
 
-#include "MacroDefines.h"
+#include "Defines.h"
 
 using namespace std;
 

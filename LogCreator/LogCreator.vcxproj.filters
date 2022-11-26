@@ -18,6 +18,12 @@
     <ClInclude Include="LogCreator.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="FileOperator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MacroDefines.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LogCreator.cpp">

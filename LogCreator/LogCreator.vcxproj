@@ -132,7 +132,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="FileOperator.h" />
     <ClInclude Include="LogCreator.h" />
+    <ClInclude Include="MacroDefines.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LogCreator.cpp" />

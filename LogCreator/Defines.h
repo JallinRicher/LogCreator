@@ -36,17 +36,9 @@
 #define MAX_LINE_LENGTH		1024
 #define LOG_BUFFER_SIZE		1024
 
-enum class LogLevel
-{
-	FATAL = 0,			// 致命错误，可能导致程序运行终止
-	ERROR,				// 致命错误，程序可能可以继续运行
-	WARN,				// 警告，存在潜在危险
-	INFO,				// 程序运行过程信息
-	DEBUG,				// 调试信息
-	ALL					// 一般信息
-};
-
-typedef struct CustLog
-{
-	std::string level;
-}CustLog;
+#define FATAL		"FATAL"		// 致命错误，可能导致程序运行终止
+#define ERROR		"ERROR"		// 致命错误，程序可能可以继续运行
+#define WARN		"WARN"		// 警告，存在潜在危险
+#define INFO		"INFO"		// 程序运行过程信息
+#define DEBUG		"DEBUG"		// 调试信息
+#define NORMAL		"NORMAL"	// 一般信息

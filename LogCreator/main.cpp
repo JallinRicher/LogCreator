@@ -2,10 +2,9 @@
 
 int main(int argc, char** argv)
 {
-	LogCreator::createFile("./Log");
-	LogCreator log("./Log/log.txt");
-	log.StyledWriteLog("This is Styled Log: Today is %s %s.\n", __DATE__, __TIME__);
-	log.WriteLog("This is Generally Log: Today is %s %s.\n", __DATE__, __TIME__);
-	log.WriteLog("This is Generally Log: Today is %s %s.This is Generally Log, This is Generally Log, This is Generally Log, This is Generally Log"
-		"This is Generally Log, This is Generally Log, This is Generally Log, This is Generally Log, This is Generally Log", __DATE__, __TIME__);
+	LogCreator::createFolder("./Log");
+	LogCreator log("./Log/log.log");
+	log.WriteLog(NORMAL, "System info");
+	log.WriteLog(DEBUG, "Debug info");
+	log.WriteLog(FATAL, "Fatal error");
 }

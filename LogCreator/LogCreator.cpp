@@ -6,8 +6,7 @@ LogCreator::LogCreator(IN string FilePath, IN int Mode)
 	if (!m_LogFile.is_open())
 		fprintf_s(stderr, "<<< [ %s %s ] Create log file failed.\n", __DATE__, __TIME__);
 
-	m_LogFile << "************************************** " << __DATE__ << __TIME__ << " Log file start here **************************************" << endl;
-	m_LogFile << "********************************************************************************************************************************" << endl << endl;
+	m_LogFile << "************************************** " << __DATE__ << " " << __TIME__ << " Log file start here **************************************\n\n";
 }
 
 LogCreator::LogCreator(IN const char* FilePath, IN int Mode)
@@ -16,17 +15,15 @@ LogCreator::LogCreator(IN const char* FilePath, IN int Mode)
 	if (!m_LogFile.is_open())
 		fprintf_s(stderr, "<<< [ %s %s ] Create log file failed.\n", __DATE__, __TIME__);
 
-	m_LogFile << "****************************************** " << __DATE__ << __TIME__ << " Log file start here *******************************************" << endl;
-	m_LogFile << "********************************************************************************************************************************" << endl << endl;
+	m_LogFile << "****************************************** " << __DATE__ << " " << __TIME__ << " Log file start here *******************************************\n\n";
 }
 
 LogCreator::~LogCreator()
 {
-	m_LogFile << "\n\n****************************************** " << __DATE__ << __TIME__ << " Log file end here *******************************************" << endl;
-	m_LogFile << "********************************************************************************************************************************" << endl << endl;
+	m_LogFile << "\n****************************************** " << __DATE__ << __TIME__ << " Log file end here ********************************************\n\n";
 }
 
-size_t LogCreator::StyledWriteLog(IN const char* _Format, ...)
+size_t LogCreator::WriteLog(IN const char* Level, IN const char* _Format, ...)
 {
 	va_list ap;
 	char* res = nullptr;
@@ -38,28 +35,15 @@ size_t LogCreator::StyledWriteLog(IN const char* _Format, ...)
 		return 0;
 
 	string _str1 = "<<< [ ";
+	_str1 += Level;
+	_str1 += " ] [ ";
 	string _date = __DATE__;
 	string _time = __TIME__;
 	string _str2 = " ] ";
 	string _str3 = res;
+	string Log = _str1 + _date + " " + _time + _str2 + _str3;
 
-	string StyledLog = _str1 + _date + " " + _time + _str2 + _str3;
-	m_LogFile << StyledLog;
-	return StyledLog.length();
-}
-
-size_t LogCreator::WriteLog(IN const char* _Format, ...)
-{
-	va_list ap;
-	char* res = nullptr;
-	va_start(ap, _Format);
-	res = _writeLog(_Format, ap);
-	va_end(ap);
-
-	if (res == nullptr)
-		return 0;
-
-	m_LogFile << res;
+	m_LogFile << Log << endl;
 	return strlen(res);
 }
 
@@ -75,7 +59,7 @@ char* LogCreator::_writeLog(IN const char* _Format, IN va_list ap)
 	return m_Buffer;
 }
 
-void LogCreator::createFile(IN const string& FilePath)
+void LogCreator::createFolder(IN const string& FilePath)
 {
 	char* pcSubDir = NULL;
 	char* pcLast = NULL;
@@ -132,7 +116,7 @@ void LogCreator::createFile(IN const string& FilePath)
 	return;
 }
 
-void LogCreator::createFile(IN const char* _FilePath)
+void LogCreator::createFolder(IN const char* _FilePath)
 {
 	string FilePath = _FilePath;
 	char* pcSubDir = NULL;
@@ -188,157 +172,4 @@ void LogCreator::createFile(IN const char* _FilePath)
 
 	free((void*)pcFullDir);
 	return;
-}
-
-void LogCreator::FatalLog(const char* _Format, ...)
-{
-	LogLevel level = LogLevel::FATAL;
-	va_list ap;
-	char* res = nullptr;
-	va_start(ap, _Format);
-	res = _writeLog(_Format, ap);
-	va_end(ap);
-
-	if (res == nullptr)
-		return;
-
-	string _str1 = "<<< [ ";
-	string _date = __DATE__;
-	string _time = __TIME__;
-	string _str2 = " ] [ FATAL ] ";
-	string _str3 = res;
-
-	string StyledLog = _str1 + _date + " " + _time + _str2 + _str3;
-	m_LogFile << StyledLog;
-}
-
-void LogCreator::ErrorLog(const char* _Format, ...)
-{
-	LogLevel level = (LogLevel)1;
-	va_list ap;
-	char* res = nullptr;
-	va_start(ap, _Format);
-	res = _writeLog(_Format, ap);
-	va_end(ap);
-
-	if (res == nullptr)
-		return;
-
-	string _str1 = "<<< [ ";
-	string _date = __DATE__;
-	string _time = __TIME__;
-	string _str2 = " ] [ ERROR ] ";
-	string _str3 = res;
-
-	string StyledLog = _str1 + _date + " " + _time + _str2 + _str3;
-	m_LogFile << StyledLog;
-}
-
-void LogCreator::WarnLog(const char* _Format, ...)
-{
-	LogLevel level = LogLevel::WARN;
-	va_list ap;
-	char* res = nullptr;
-	va_start(ap, _Format);
-	res = _writeLog(_Format, ap);
-	va_end(ap);
-
-	if (res == nullptr)
-		return;
-
-	string _str1 = "<<< [ ";
-	string _date = __DATE__;
-	string _time = __TIME__;
-	string _str2 = " ] [ WARN ] ";
-	string _str3 = res;
-
-	string StyledLog = _str1 + _date + " " + _time + _str2 + _str3;
-	m_LogFile << StyledLog;
-}
-
-void LogCreator::InfoLog(const char* _Format, ...)
-{
-	LogLevel level = LogLevel::INFO;
-	va_list ap;
-	char* res = nullptr;
-	va_start(ap, _Format);
-	res = _writeLog(_Format, ap);
-	va_end(ap);
-
-	if (res == nullptr)
-		return;
-
-	string _str1 = "<<< [ ";
-	string _date = __DATE__;
-	string _time = __TIME__;
-	string _str2 = " ] [ INFO ] ";
-	string _str3 = res;
-
-	string StyledLog = _str1 + _date + " " + _time + _str2 + _str3;
-	m_LogFile << StyledLog;
-}
-
-void LogCreator::DebugLog(const char* _Format, ...)
-{
-	LogLevel level = LogLevel::DEBUG;
-	va_list ap;
-	char* res = nullptr;
-	va_start(ap, _Format);
-	res = _writeLog(_Format, ap);
-	va_end(ap);
-
-	if (res == nullptr)
-		return;
-
-	string _str1 = "<<< [ ";
-	string _date = __DATE__;
-	string _time = __TIME__;
-	string _str2 = " ] [ DEBUG ] ";
-	string _str3 = res;
-
-	string StyledLog = _str1 + _date + " " + _time + _str2 + _str3;
-	m_LogFile << StyledLog;
-}
-
-void LogCreator::AllLog(const char* _Format, ...)
-{
-	LogLevel level = LogLevel::ALL;
-	va_list ap;
-	char* res = nullptr;
-	va_start(ap, _Format);
-	res = _writeLog(_Format, ap);
-	va_end(ap);
-
-	if (res == nullptr)
-		return;
-
-	string _str1 = "<<< [ ";
-	string _date = __DATE__;
-	string _time = __TIME__;
-	string _str2 = " ] [ ALL ] ";
-	string _str3 = res;
-
-	string StyledLog = _str1 + _date + " " + _time + _str2 + _str3;
-	m_LogFile << StyledLog;
-}
-
-void LogCreator::CustomLog(IN const char* _Format, IN CustLog customLog, ...)
-{
-	va_list ap;
-	char* res = nullptr;
-	va_start(ap, _Format);
-	res = _writeLog(_Format, ap);
-	va_end(ap);
-
-	if (res == nullptr)
-		return;
-
-	string _str1 = "<<< [ ";
-	string _date = __DATE__;
-	string _time = __TIME__;
-	string _str2 = " ] [ " + customLog.level + "] ";
-	string _str3 = res;
-
-	string StyledLog = _str1 + _date + " " + _time + _str2 + _str3;
-	m_LogFile << StyledLog;
 }

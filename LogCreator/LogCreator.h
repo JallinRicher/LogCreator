@@ -35,7 +35,6 @@ public:
 	size_t CLASS_API PUBLIC_FUNCTION WriteLog(IN const char* Level, IN const char* _Format, ...);
 
 public:
-	static void createFolder(IN const string& FilePath);
 	static void createFolder(IN const char* FilePath);
 
 private:

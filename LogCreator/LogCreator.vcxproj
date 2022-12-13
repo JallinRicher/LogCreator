@@ -133,6 +133,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="FileOperator.h" />
+    <ClInclude Include="Log.h" />
     <ClInclude Include="LogCreator.h" />
     <ClInclude Include="Defines.h" />
   </ItemGroup>
